@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: webapp
+spec:
+  selector:
+    matchLabels:
+      app: webapp
+  replicas: 2
+  template: #template for the pods
+    metadata: 
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: richardchesterwood/k8s-fleetman-webapp-angular:release0-5
+
+---
+
+apiVersion: apps/v1
+kind: ReplicaSet
+spec:
+  selector:
+    matchLabels:
+      app: queue
+  replicas: 2
+  template: #template for pods
+    metadata: 
+      labels:
+        app: queue
+    spec:
+      containers:
+      - name: webapp
+        image: richardchesterwood/k8s-fleetman-queue:release1
