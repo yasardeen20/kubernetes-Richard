@@ -23,7 +23,7 @@ metadata:
 
 spec:
   selector:
-    app: queue
+    app: fleetman-queue
 
   ports:
     - name: http
