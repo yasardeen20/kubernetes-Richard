@@ -1,17 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fleetman-webapp
+  name: fleetman-front-end 
 
 spec:
   selector:
-    app: webapp
-
+    app: front-end
   ports:
     - name: http
       port: 80
-      nodePort: 30080
-
+      nodePort: 30020
   type: NodePort
 
 ---
@@ -23,12 +21,40 @@ metadata:
 
 spec:
   selector:
-    app: fleetman-queue
+    app: queue
 
   ports:
     - name: http
       port: 8161
       nodePort: 30010
 
+    - name: endpoint
+      port: 61616
   type: NodePort
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-api-gateway 
+
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - name: http
+      port: 8080
+  type: ClusterIP
+
+
+
+
+
+
+
+
+
+
 
